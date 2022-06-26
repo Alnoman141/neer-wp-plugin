@@ -31,3 +31,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Copyright 2005-2015 Automattic, Inc.
 */
+
+// all of the three methods below are the same
+// if(!defined('ABSPATH')){
+//     die;
+// }
+
+// define('ABSPATH') or die("You can't access this file directly.");
+
+if(!function_exists('add_action')){
+    echo "You can't access this file directly.";
+    exit;
+}
