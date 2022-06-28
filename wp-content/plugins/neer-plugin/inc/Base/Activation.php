@@ -2,7 +2,7 @@
 /**
  * @package NeerPlugin
  */
-namespace Inc;
+namespace Inc\Base;
 
 class Activation {
     public static function activate() {
