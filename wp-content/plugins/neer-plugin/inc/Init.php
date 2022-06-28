@@ -15,6 +15,7 @@ namespace Inc;
         return [
             Pages\Admin::class,
             Base\Enqueue::class,
+            Base\SettingsLinks::class,
         ];
     }
 
