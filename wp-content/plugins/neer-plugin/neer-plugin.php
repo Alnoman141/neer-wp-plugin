@@ -39,10 +39,19 @@ Copyright 2005-2015 Automattic, Inc.
 
 // define('ABSPATH') or die("You can't access this file directly.");
 
+
+
 if(!function_exists('add_action')){
     echo "You can't access this file directly.";
     exit;
 }
+
+if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
+    require_once dirname(__FILE__).'/vendor/autoload.php';
+}
+
+use Inc\Activation;
+use Inc\Deactivate;
 
 class NeerPlugin {
 
@@ -76,13 +85,12 @@ class NeerPlugin {
 
     function activation(){
         // code to run when plugin is activated
-        $this->custom_post_type();
-        flush_rewrite_rules();
+        Activation::activate();
     }
 
     function deactivate(){
         // code to run when plugin is deactivated
-        flush_rewrite_rules();
+        Deactivate::deactivate();
     }
 
     function uninstall(){
