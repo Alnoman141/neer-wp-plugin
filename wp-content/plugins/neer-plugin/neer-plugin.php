@@ -51,23 +51,15 @@ if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
     require_once dirname(__FILE__).'/vendor/autoload.php';
 }
 
-// define constants
-define('NEER_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('NEER_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('NEER_PLUGIN', plugin_basename(__FILE__));
-
-// use classes
-use Inc\Base\Activation;
-use Inc\Base\Deactivate;
 
 // activate the plugin
 function activate_neer_plugin(){
-    Activation::activate();
+    Inc\Base\Activation::activate();
 };
 
 // deactivate the plugin
 function deactivate_neer_plugin(){
-    Deactivate::deactivate();
+    Inc\Base\Deactivate::deactivate();
 };
 
 //  register activation and deactivation hooks

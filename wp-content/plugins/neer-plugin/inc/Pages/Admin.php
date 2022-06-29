@@ -5,17 +5,33 @@ namespace Inc\Pages;
 /**
  * @package NeerPlugin
  */
+ 
+ use Inc\Base\BaseController;
+ use Inc\Api\SettingsApi;
 
- class Admin {
+ class Admin extends BaseController{
+
+    public $pages = array();
+
+    public $settings;
+
+    public function __construct(){
+        $this->settings = new SettingsApi();
+
+        $this->pages = array(
+            array(
+                "page_title" => "Neer Plugin",
+                "menu_title" => "Neer Plugin",
+                "capability" => "manage_options",
+                "menu_slug" => "neer_plugin",
+                "callback" => function(){echo "<h1>Hello! Neer Plugin</h1>";},
+                "icon_url" => "dashicons-store",
+                "position" => 110
+            ),
+        );
+    }
+
     public function register(){
-        add_action('admin_menu', array($this, 'add_admin_menu'));
-    }
-
-    public function add_admin_menu(){
-        add_menu_page('Neer Plugin', 'Neer Plugin', 'manage_options', 'neer_plugin', array($this, 'admin_index'), 'dashicons-editor-paste-word', 110);
-    }
-
-    public function admin_index(){
-        require_once NEER_PLUGIN_PATH. 'templates/admin.php';
+        $this->settings->addPages($this->pages)->register();
     }
  }
