@@ -13,6 +13,8 @@ namespace Inc\Pages;
 
     public $pages = array();
 
+    public $subpages = array();
+
     public $settings;
 
     public function __construct(){
@@ -29,9 +31,36 @@ namespace Inc\Pages;
                 "position" => 110
             ),
         );
+
+        $this->subpages = array(
+            array(
+                "parent_slug" => "neer_plugin",
+                "page_title" => "Custom Post Type",
+                "menu_title" => "CPT",
+                "capability" => "manage_options",
+                "menu_slug" => "neer_plugin_cpt",
+                "callback" => function(){echo "<h1>Custom Post Type</h1>";}
+            ),
+            array(
+                "parent_slug" => "neer_plugin",
+                "page_title" => "Custom Taxonomies",
+                "menu_title" => "Taxonomies",
+                "capability" => "manage_options",
+                "menu_slug" => "neer_plugin_taxonomies",
+                "callback" => function(){echo "<h1>Custom Taxonomies";}
+            ),
+            array(
+                "parent_slug" => "neer_plugin",
+                "page_title" => "Custom Widgets",
+                "menu_title" => "Widgets",
+                "capability" => "manage_options",
+                "menu_slug" => "neer_plugin_widgets",
+                "callback" => function(){echo "<h1>Custom Widgets";}
+            ),
+        );
     }
 
     public function register(){
-        $this->settings->addPages($this->pages)->register();
+        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
  }
